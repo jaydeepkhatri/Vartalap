@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A real time chat application",
   "main": "server.js",
-  "start": "node app.js",
+  "start": "node server.js",
   "scripts": {
     "devStart": "nodemon server.js"
   },
