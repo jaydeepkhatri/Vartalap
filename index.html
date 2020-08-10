@@ -7,7 +7,6 @@
 	<title> Vartalap </title>
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
 	<style>
 		:root {
 			/* ? Blue Color --themecolor: rgb(31, 128, 255);	--conmesscolor: #abc; */
@@ -36,7 +35,6 @@
 			height: 100vh;
 			width: 100%;
 			background: rgb(235, 235, 235);
-			/* background: var(--themecolor); */
 			z-index: 1;
 			position: fixed;
 			top: 0;
@@ -44,15 +42,11 @@
 		}
 
 		.formcontainer {
-			/* display: flex;
-	align-items: center;
-	justify-content: center; */
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			place-items: center;
 			height: 100%;
 			position: relative;
-			/* flex-direction: column; */
 		}
 
 		.cornerimg {
@@ -60,10 +54,6 @@
 			z-index: -1;
 		}
 
-		/* .formcontainer .tl {
-	top:0;
-	left: 0;
-} */
 		.formcontainer .bl {
 			bottom: 0;
 			left: 0;
@@ -74,10 +64,6 @@
 			right: 0;
 		}
 
-		/* .formcontainer .tr {
-	top: 0;
-	right: 0;
-} */
 		.formcontainer .imgcontainer {
 			width: 300px;
 		}
@@ -148,7 +134,6 @@
 			height: 600px;
 			background: var(--maincontainerbg);
 			box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
-			/* border-radius: 20px; */
 			position: relative;
 
 		}
@@ -218,17 +203,12 @@
 		.messageright {
 			padding: 12px 16px;
 			border-radius: 50px;
-			/* background: var(--white); */
-
 			background: var(--themecolor);
 			color: var(--white);
 			box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
 		}
 
 		.messageleft {
-			/* background: var(--themecolor) !important;
-	color: var(--white); */
-
 			color: #000;
 			background: var(--white);
 		}
@@ -268,7 +248,6 @@
 			border: 0;
 			background: aliceblue;
 			border-bottom: 2px solid var(--themecolor);
-			/* border: 1px solid #000; */
 			border-radius: 4px;
 			flex-grow: 1;
 		}
@@ -308,7 +287,6 @@
 			}
 		}
 	</style>
-
 	<!-- <script defer type="text/javascript" src="./socket.io.js"></script> -->
 	<!-- <script defer src="localhost:3000/socket.io/socket.io.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
@@ -331,13 +309,10 @@
 					placeholder="Write your Nick name" />
 				<button type="submit" class="userformsubmit">Continue</button>
 			</form>
-
-			<!-- <img src="./Path 1.svg" class="cornerimg tl" /> -->
 			<img src="https://raw.githubusercontent.com/jaydeepkhatri/Vartalap/master/Path%202.svg"
 				class="cornerimg bl" />
 			<img src="https://raw.githubusercontent.com/jaydeepkhatri/Vartalap/master/Path%203.svg"
 				class="cornerimg br" />
-			<!-- <img src="./Path 4.svg" class="cornerimg tr" /> -->
 		</div>
 	</div>
 
@@ -377,8 +352,6 @@
 		const loginoverlay = document.querySelector('#loginoverlay');
 
 
-		// const name = prompt('What is your name?');
-		// socket.emit('new-user', name);
 		let name = null;
 
 		usernameform.addEventListener('submit', (e) => {
@@ -421,7 +394,6 @@
 			e.preventDefault()
 			const message = messageInput.value;
 			if (message == "" || message == null || name == "" || name == null) {
-				// connectionMessage("Write Message");
 				alert("Becareful");
 			} else {
 				appendMessage({ username: name, message: message });
