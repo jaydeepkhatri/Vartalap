@@ -7,11 +7,312 @@
 	<title> Vartalap </title>
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
+	<style>
+		:root {
+			/* ? Blue Color --themecolor: rgb(31, 128, 255);	--conmesscolor: #abc; */
+
+			/* *Green Color --themecolor: rgb(0, 197, 66);		--conmesscolor: rgb(226, 255, 236); */
+
+			/* ! Pink Color --themecolor: rgb(255, 0, 106);		--conmesscolor: rgb(255, 168, 204); */
+			--themecolor: rgb(31, 128, 255);
+			--conmesscolor: #abc;
+			--maincontainerbg: rgb(248, 248, 248);
+			--white: #fff;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background: #eee;
+		}
+
+		.loginoverlay {
+			height: 100vh;
+			width: 100%;
+			background: rgb(235, 235, 235);
+			/* background: var(--themecolor); */
+			z-index: 1;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+
+		.formcontainer {
+			/* display: flex;
+	align-items: center;
+	justify-content: center; */
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			place-items: center;
+			height: 100%;
+			position: relative;
+			/* flex-direction: column; */
+		}
+
+		.cornerimg {
+			position: absolute;
+			z-index: -1;
+		}
+
+		/* .formcontainer .tl {
+	top:0;
+	left: 0;
+} */
+		.formcontainer .bl {
+			bottom: 0;
+			left: 0;
+		}
+
+		.formcontainer .br {
+			bottom: 0;
+			right: 0;
+		}
+
+		/* .formcontainer .tr {
+	top: 0;
+	right: 0;
+} */
+		.formcontainer .imgcontainer {
+			width: 300px;
+		}
+
+		.formcontainer .imgcontainer img {
+			width: 100%;
+		}
+
+		.formcontainer form {
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			width: 300px;
+			padding: 20px;
+			background: var(--white);
+			border-radius: 20px;
+			box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+
+		}
+
+		.formcontainer form h2 {
+			margin-bottom: 20px;
+		}
+
+		.formcontainer form .userforminput,
+		.formcontainer form .userformsubmit {
+			padding: 12px;
+			border-radius: 20px;
+			font-size: 16px;
+			text-align: center;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+
+		}
+
+		.formcontainer form .userforminput {
+			margin-bottom: 20px;
+		}
+
+		.formcontainer form .userformsubmit {
+			background: var(--themecolor);
+			color: var(--white);
+		}
+
+		.formcontainer form .userformsubmit:hover {
+			box-shadow: 0 0 20px var(--themecolor);
+		}
+
+		@media screen and (max-width: 780px) {
+			.formcontainer {
+				grid-template-columns: 1fr;
+			}
+
+			.formcontainer .imgcontainer {
+				display: none;
+			}
+
+		}
+
+
+
+
+
+		/** Main Content*/
+		.maincontainer {
+			width: 100%;
+			max-width: 800px;
+			margin: 100px auto;
+			height: 600px;
+			background: var(--maincontainerbg);
+			box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
+			/* border-radius: 20px; */
+			position: relative;
+
+		}
+
+		.innermain {
+			overflow: auto;
+			height: 100%;
+
+		}
+
+		.navcontainer {
+			background: var(--themecolor);
+			color: white;
+			height: 80px;
+			position: sticky;
+			top: 0;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+		}
+
+		.navbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 80%;
+			margin: auto;
+			height: 100%;
+		}
+
+		.navbar h2 {
+			letter-spacing: 2px;
+			text-transform: uppercase;
+		}
+
+		.navbar ul {
+			list-style: none;
+		}
+
+
+		.message-container {
+			padding: 16px;
+			width: 100%;
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: 1fr;
+			margin-bottom: 44px;
+			/* overflow-y: scroll; */
+		}
+
+		.message {
+			display: flex;
+		}
+
+		.messagecenter {
+			justify-content: center;
+
+		}
+
+		.messageleftcont {
+			justify-content: left;
+		}
+
+		.messagerightcont {
+			justify-content: right;
+		}
+
+		.messageleft,
+		.messageright {
+			padding: 12px 16px;
+			border-radius: 50px;
+			/* background: var(--white); */
+
+			background: var(--themecolor);
+			color: var(--white);
+			box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
+		}
+
+		.messageleft {
+			/* background: var(--themecolor) !important;
+	color: var(--white); */
+
+			color: #000;
+			background: var(--white);
+		}
+
+		.messageleft .username {
+			color: var(--themecolor);
+			font-size: 12px;
+		}
+
+		.conmess {
+			text-align: center;
+			background: var(--conmesscolor);
+			font-size: 14px;
+			border-radius: 3px;
+			width: 150px;
+			padding: 12px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19);
+		}
+
+		.footer {
+			position: absolute;
+			bottom: 0;
+			background-color: var(--maincontainerbg);
+			width: 100%;
+			padding: 0 12px;
+			height: 40px;
+		}
+
+		.send-container {
+			width: 100%;
+			margin-bottom: 20px;
+			display: flex;
+		}
+
+		.message-input {
+			padding: 12px;
+			border: 0;
+			background: aliceblue;
+			border-bottom: 2px solid var(--themecolor);
+			/* border: 1px solid #000; */
+			border-radius: 4px;
+			flex-grow: 1;
+		}
+
+		.message-input:active {
+			outline: 0;
+		}
+
+		.send-button {
+			margin-left: 4px;
+			border: 2px solid var(--themecolor);
+			background: var(--white);
+			border-radius: 20px;
+			padding: 0 20px;
+			transition: 0.15s;
+		}
+
+		.send-button:hover {
+			color: var(--white);
+			background: var(--themecolor);
+		}
+
+		.send-button:active {
+			color: var(--white);
+			box-shadow: 0 0 50px 50px var(--themecolor) inset, 0 0 10px var(--themecolor);
+		}
+
+		@media screen and (max-width: 600px) {
+			body {
+				overflow: hidden;
+			}
+
+			.maincontainer {
+				max-width: 100%;
+				height: 100vh;
+				margin: 0;
+			}
+		}
+	</style>
+
 	<!-- <script defer type="text/javascript" src="./socket.io.js"></script> -->
 	<!-- <script defer src="localhost:3000/socket.io/socket.io.js"></script> -->
-	<script defer src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
-	<script defer type="text/javascript" src="script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+	<!-- <script defer type="text/javascript" src="script.js"></script> -->
 </head>
 
 
@@ -21,7 +322,8 @@
 	<div class="loginoverlay" id="loginoverlay">
 		<div class="formcontainer">
 			<div class="imgcontainer">
-				<img src="undraw_secure_login_pdn4.svg" />
+				<img
+					src="https://raw.githubusercontent.com/jaydeepkhatri/Vartalap/master/undraw_secure_login_pdn4.svg" />
 			</div>
 			<form id="usernameform">
 				<h2>Vartalap <span class="logo"><i class="fa fa-commenting"></i> </span></h2>
@@ -31,8 +333,10 @@
 			</form>
 
 			<!-- <img src="./Path 1.svg" class="cornerimg tl" /> -->
-			<img src="./Path 2.svg" class="cornerimg bl" />
-			<img src="./Path 3.svg" class="cornerimg br" />
+			<img src="https://raw.githubusercontent.com/jaydeepkhatri/Vartalap/master/Path%202.svg"
+				class="cornerimg bl" />
+			<img src="https://raw.githubusercontent.com/jaydeepkhatri/Vartalap/master/Path%203.svg"
+				class="cornerimg br" />
 			<!-- <img src="./Path 4.svg" class="cornerimg tr" /> -->
 		</div>
 	</div>
@@ -61,6 +365,120 @@
 		</div>
 	</div>
 
+
+	<script defer>
+		const socket = io('http://localhost:3000');
+		const messageContainer = document.querySelector('#message-container');
+		const messageForm = document.querySelector('#send-container');
+		const innermain = document.querySelector("#innermain");
+		const currentusername = document.querySelector("#useractive");
+		const messageInput = document.querySelector('#message-input');
+		const usernameform = document.querySelector('#usernameform');
+		const loginoverlay = document.querySelector('#loginoverlay');
+
+
+		// const name = prompt('What is your name?');
+		// socket.emit('new-user', name);
+		let name = null;
+
+		usernameform.addEventListener('submit', (e) => {
+			e.preventDefault();
+			name = document.querySelector('#username').value;
+			if (name === "" || name === null) {
+				alert("Wrtie a name");
+			} else {
+				socket.emit('new-user', name);
+				connectionMessage(`${name} joined`);
+
+				currentusername.innerHTML = name;
+				loginoverlay.style.display = "none";
+
+				socket.on('chat-message', data => {
+					appendMessage(data)
+				})
+
+				socket.on('user-connected', data => {
+					connectionMessage(`${data} joined`);
+
+				})
+
+				socket.on('user-disconnected', name => {
+					connectionMessage(`${name} left`)
+				})
+
+				socket.on('themecolor', color => {
+					changetheme(color);
+				})
+			}
+		})
+
+		function changetheme(color) {
+			document.documentElement.style.cssText = color;
+			return true;
+		}
+
+		messageForm.addEventListener('submit', e => {
+			e.preventDefault()
+			const message = messageInput.value;
+			if (message == "" || message == null || name == "" || name == null) {
+				// connectionMessage("Write Message");
+				alert("Becareful");
+			} else {
+				appendMessage({ username: name, message: message });
+				socket.emit('send-chat-message', message)
+
+				if (messageInput.value == "!green") {
+					socket.emit('changetheme', "--themecolor: rgb(0, 197, 66); --conmesscolor: rgb(226, 255, 236)")
+					changetheme("--themecolor: rgb(0, 197, 66); --conmesscolor: rgb(226, 255, 236)");
+				} else if (messageInput.value == "!blue") {
+					socket.emit('changetheme', "--themecolor: rgb(31, 128, 255);	--conmesscolor: #abc;")
+					changetheme("--themecolor: rgb(31, 128, 255);	--conmesscolor: #abc;");
+				} else if (messageInput.value == "!pink") {
+					socket.emit('changetheme', "--themecolor: rgb(255, 0, 106);		--conmesscolor: rgb(255, 168, 204);")
+					changetheme("--themecolor: rgb(255, 0, 106);		--conmesscolor: rgb(255, 168, 204);");
+				}
+				messageInput.value = '';
+				innermain.scrollTop = innermain.scrollHeight;
+			}
+		})
+
+
+		function connectionMessage(msg) {
+			const connectionEL = document.createElement("span");
+			connectionEL.className = "conmess";
+			connectionEL.innerHTML = msg;
+			const messagediv = document.createElement("div");
+			messagediv.className = "message messagecenter";
+			messagediv.append(connectionEL);
+			messageContainer.append(messagediv);
+			innermain.scrollTop = innermain.scrollHeight;
+		}
+
+		function appendMessage(data) {
+			const messageElement = document.createElement('span');
+
+			console.log(data);
+			const messagediv = document.createElement("div");
+			if (data.username === name) {
+				messagediv.className = "message messagerightcont";
+				messageElement.className = "messageright";
+			} else {
+				messagediv.className = "message messageleftcont";
+				messageElement.className = "messageleft";
+				const otherusername = document.createElement("p");
+				otherusername.className = "username";
+				otherusername.innerHTML = data.name;
+				messageElement.append(otherusername);
+			}
+			messageElement.innerHTML += data.message;
+			messagediv.append(messageElement);
+			messageContainer.append(messagediv);
+			innermain.scrollTop = innermain.scrollHeight;
+		}
+		function activeusers(totalusers) {
+			document.querySelector("#useractive").innerHTML = totalusers;
+		}
+	</script>
 </body>
 
 </html>
