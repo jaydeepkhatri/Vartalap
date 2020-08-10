@@ -359,7 +359,7 @@
 	<script defer>
 		//there can be problems with localhost port number, need to figure it out with the process env port
 
-		const socket = io(`http://localhost:3000`);
+		const socket = io();
 		const messageContainer = document.querySelector('#message-container');
 		const messageForm = document.querySelector('#send-container');
 		const innermain = document.querySelector("#innermain");
