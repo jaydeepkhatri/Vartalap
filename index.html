@@ -412,7 +412,6 @@
 		const likebtn = document.querySelector("#likebutton");
 
 		sendbutton.style.display = "none";
-		// likebtn.style.display = "none";
 		let emoji = "👍"
 		name = null;
 
@@ -433,7 +432,6 @@
 				alert("Wrtie a name");
 			}
 			if (name.match(/^[a-zA-Z0-9]+$/)) {
-				alert(true);
 				socket.emit('new-user', name);
 				connectionMessage(`${name} joined`);
 
@@ -505,9 +503,6 @@
 					alert(error);
 					alert(message);
 				});
-				if (confirmation.disconnected) {
-					connectionMessage("Seems you are disconnected!");
-				}
 				if (messageInput.value == "!green") {
 					socket.emit('changetheme', colorstheme.green);
 					changetheme(colorstheme.green);
