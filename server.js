@@ -12,7 +12,7 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/public');
+    res.sendFile(__dirname + 'public');
 });
 
 http.listen(port, function () {
