@@ -5,11 +5,12 @@ Vartalap is a build in view of single page application (i.e. Not to refresh the 
 
 Probable future updates are
 - typing
-- make more secure to XSS attacks
+- active users
+- change emoji
 - rooms
 - bot
 
-### To run on localhost
+### Node Modules
 ```
 Install (npm i)
 - ExpressJS
@@ -24,6 +25,6 @@ npm run devStart
 ```
 And Start Live-server 
 
-> The style content and script content are loaded in with the index page, as the heroku didnt supported static files request.
+> Style & Script files are seperate, I found the culprit It was me 😐
 
 Your suggestions are welcomed. Hosted on Github, Powered by Heroku.
