@@ -1,6 +1,6 @@
 {
   "name": "vartalap",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "A real time chat application",
   "main": "server.js",
   "start": "node server.js",
