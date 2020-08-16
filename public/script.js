@@ -10,6 +10,8 @@ const loginoverlay = document.querySelector('#loginoverlay');
 const sendbutton = document.querySelector("#send-button");
 const likebtn = document.querySelector("#likebutton");
 
+
+let currenttheme = "blue";
 sendbutton.style.display = "none";
 let emoji = "👍"
 name = null;
@@ -32,9 +34,7 @@ usernameform.addEventListener('submit', (e) => {
     }
     if (name.match(/^[a-zA-Z0-9]+$/)) {
         socket.emit('new-user', name);
-        connectionMessage(`${name} joined`);
-
-        currentusername.innerHTML = name;
+        // currentusername.innerHTML = name;
         loginoverlay.style.display = "none";
 
         socket.on('chat-message', data => {
@@ -42,12 +42,23 @@ usernameform.addEventListener('submit', (e) => {
         });
 
         socket.on('user-connected', data => {
-            connectionMessage(`${data} joined`);
-
+            connectionMessage(`${data.name} joined`);
+            // if (data.totalusers == '1') {
+            //     currentusername.innerHTML = data.totalusers + " User";
+            // } else {
+            //     currentusername.innerHTML = data.totalusers + " Users";
+            // }
+            currentusername.innerHTML = data.totalusers + " active";
         });
 
-        socket.on('user-disconnected', name => {
-            connectionMessage(`${name} left`)
+        socket.on('user-disconnected', data => {
+            connectionMessage(`${data.name} left`);
+            if (data.totalusers === '1') {
+                currentusername.innerHTML = data.totalusers + " user";
+            } else {
+                currentusername.innerHTML = data.totalusers + " users";
+            }
+
         });
 
         socket.on('themecolor', color => {
@@ -68,12 +79,9 @@ messageInput.addEventListener("input", (e) => {
     if (e.target.value === "") {
         sendbutton.style.display = "none";
         likebtn.style.display = "block";
-
-
     } else {
         sendbutton.style.display = "block";
         likebtn.style.display = "none";
-
     }
 });
 
@@ -82,7 +90,7 @@ messageInput.addEventListener("input", (e) => {
 
 likebtn.addEventListener("click", (e) => {
     appendMessage({ username: name, message: emoji });
-    let confirmation = socket.emit('send-chat-message', emoji);
+    socket.emit('send-chat-message', emoji);
 });
 
 
@@ -98,10 +106,7 @@ messageForm.addEventListener('submit', e => {
         return null;
     } else {
         appendMessage({ username: name, message: message });
-        let confirmation = socket.emit('send-chat-message', message, function (error, message) {
-            alert(error);
-            alert(message);
-        });
+        socket.emit('send-chat-message', message);
         if (messageInput.value == "!green") {
             socket.emit('changetheme', colorstheme.green);
             changetheme(colorstheme.green);
@@ -123,7 +128,9 @@ messageForm.addEventListener('submit', e => {
     }
 });
 
+function setTheme() {
 
+}
 
 
 function connectionMessage(msg) {
