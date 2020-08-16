@@ -10,6 +10,8 @@ const loginoverlay = document.querySelector('#loginoverlay');
 const sendbutton = document.querySelector("#send-button");
 const likebtn = document.querySelector("#likebutton");
 
+const sidebar = document.querySelector("#sidebar");
+const screencover = document.querySelector("#screencover");
 
 let currenttheme = "blue";
 sendbutton.style.display = "none";
@@ -36,6 +38,7 @@ usernameform.addEventListener('submit', (e) => {
         socket.emit('new-user', name);
         // currentusername.innerHTML = name;
         loginoverlay.style.display = "none";
+        messageInput.focus();
 
         socket.on('chat-message', data => {
             appendMessage(data)
@@ -128,10 +131,6 @@ messageForm.addEventListener('submit', e => {
     }
 });
 
-function setTheme() {
-
-}
-
 
 function connectionMessage(msg) {
     const connectionEL = document.createElement("span");
@@ -187,4 +186,15 @@ function currentTime() {
         minutes = "0" + minutes;
     }
     return `${hours} : ${minutes}`;
+}
+
+
+
+function openSidebar() {
+    sidebar.style.width = "300px";
+    screencover.style.display = "block";
+}
+function closeSidebar() {
+    sidebar.style.width = "0";
+    screencover.style.display = "none";
 }

@@ -1,11 +1,8 @@
 <!-- TODO: Message Send Animation-->
-<!-- -TODO: Message Time -->
-<!-- -TODO: Regex Name search -->
-<!-- -TODO: change the < > to &lt; && &gt;-->
-<!-- -TODO: Emoji Button like messenger -->
 <!-- TODO: Change emoji command
 	!changeemoji 😍 -->
-<!-- TODO: Active Users -->
+<!-- -TODO: Active Users -->
+<!-- TODO: sidebar -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,17 +37,38 @@
 		</div>
 	</div>
 	<div class="maincontainer">
+		<div class="screencover" id="screencover" onclick="closeSidebar()"></div>
 		<main class="innermain" id="innermain">
 			<nav class="navcontainer">
 				<div class="navbar">
 					<h2><i class="fa fa-paper-plane-o"></i> Vartalap</h2>
-					<ul>
-						<li id="useractive">Users active: </li>
-					</ul>
+					<span onclick="openSidebar()"> &#9776; </span>
 				</div>
 			</nav>
 			<div id="message-container" class="message-container"></div>
+
 		</main>
+		<aside class="sidebar" id="sidebar">
+			<div class="activeusers">
+				<p id="useractive" class="sidetitle"></p>
+				<div class="useractivelist" id="useractivelist">
+					<!-- <div class="activeusersname">JD (you)</div>
+					<div class="activeusersname">King</div> -->
+				</div>
+			</div>
+			<hr />
+			<div class="colorcontainer">
+				<h2 class="sidetitle">Theme Color</h2>
+				<div class="colors">
+					<div class="color blue coloractive"></div>
+					<div class="color red"></div>
+					<div class="color green"></div>
+					<div class="color purple"></div>
+					<div class="color pink"></div>
+				</div>
+			</div>
+
+		</aside>
 		<div class="footer">
 			<form id="send-container" class="send-container">
 				<input type="text" id="message-input" placeholder="Write your message" autocomplete="off"

@@ -12,6 +12,15 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.5);
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -155,11 +164,6 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
-
-.navbar ul {
-    list-style: none;
-}
-
 
 .message-container {
     padding: 16px;
@@ -312,6 +316,103 @@ body {
     color: var(--white);
     box-shadow: 0 0 50px 50px var(--themecolor) inset, 0 0 10px var(--themecolor);
 }
+
+.screencover {
+    position: absolute;
+    z-index: 6;
+    display: none;
+    background: rgba(0,0,0,0.6);
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 7;
+    height: 100%;
+    width: 0;
+    background: var(--messageinputcolor);
+    overflow-x: hidden;
+    transition: 0.35s;
+}
+.sidebaropen {
+    width: 0 !important;
+}
+.activeusers {
+    margin-top: 20px;
+}
+.sidetitle {
+    text-align: center;
+    font-size: 20px;
+}
+.activeusers .useractivelist {
+    margin-top: 20px;
+    max-height: 240px;
+    overflow: auto;
+    margin: 10px 0;
+    border-radius: 4px;
+    background: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.5) transparent;
+}
+.useractivelist .activeusersname {
+    padding: 10px 20px;
+    display: block;
+    font-family: FontAwesome;
+    transition: 0.1s;
+}
+.useractivelist .activeusersname::before{
+    content:"\f007";
+    font-family: FontAwesome;
+    margin-right: 8px;
+}
+.useractivelist .activeusersname:hover {
+    background: #e2e2e2;
+}
+h2.sidetitle {
+    padding: 10px 0;
+}
+.colorcontainer {
+    margin: 20px;
+    background: #fff;
+}
+.colors {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    place-items: center;
+}
+.color {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: red;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
+}
+.coloractive {
+    border: 5px solid var(--conmesscolor)
+}
+
+.blue {
+    background: rgb(31, 128, 255);
+}
+.red {
+    background:rgb(255, 42, 42);
+}
+.green {
+    background: rgb(0, 197, 66);
+}
+.purple {
+    background: rgb(183, 0, 255);
+}
+.pink {
+    background: rgb(255, 0, 106);
+}
+
+
 
 @media screen and (max-width: 600px) {
     .maincontainer {
