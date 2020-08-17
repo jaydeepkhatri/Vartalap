@@ -359,14 +359,21 @@ body {
 }
 .useractivelist .activeusersname {
     padding: 10px 20px;
-    display: block;
-    font-family: FontAwesome;
+    line-height: 40px;
     transition: 0.1s;
 }
 .useractivelist .activeusersname::before{
-    content:"\f007";
-    font-family: FontAwesome;
+    content:attr(data-inital);
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    background: var(--themecolor);
     margin-right: 8px;
+    transition: 0.15s;
 }
 .useractivelist .activeusersname:hover {
     background: #e2e2e2;
@@ -392,9 +399,9 @@ h2.sidetitle {
     background: red;
     box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
 }
-.coloractive {
+/* .coloractive {
     border: 5px solid var(--conmesscolor)
-}
+} */
 
 .blue {
     background: rgb(31, 128, 255);
