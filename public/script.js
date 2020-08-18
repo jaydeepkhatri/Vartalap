@@ -1,5 +1,5 @@
-const socket = io();
-// const socket = io(`http://localhost:3000`);
+// const socket = io();
+const socket = io(`http://localhost:3000`);
 const messageContainer = document.querySelector('#message-container');
 const messageForm = document.querySelector('#send-container');
 const innermain = document.querySelector("#innermain");
@@ -11,6 +11,7 @@ const sendbutton = document.querySelector("#send-button");
 const likebtn = document.querySelector("#likebutton");
 
 const sidebar = document.querySelector("#sidebar");
+const useractivelist = document.querySelector("#useractivelist");
 const screencover = document.querySelector("#screencover");
 
 let currenttheme = "blue";
@@ -34,7 +35,7 @@ usernameform.addEventListener('submit', (e) => {
     if (name === "" || name === null) {
         alert("Wrtie a name");
     }
-    if (name.match(/^[a-zA-Z0-9]+$/)) {
+    if (name.match(/^[a-zA-Z0-9_ ]+$/)) {
         socket.emit('new-user', name);
         // currentusername.innerHTML = name;
         loginoverlay.style.display = "none";
@@ -45,7 +46,7 @@ usernameform.addEventListener('submit', (e) => {
         });
 
         socket.on('user-connected', data => {
-            connectionMessage(`${data.name} joined`);
+            connectionMessage(`${data.name}`);
             // if (data.totalusers == '1') {
             //     currentusername.innerHTML = data.totalusers + " User";
             // } else {
@@ -132,17 +133,37 @@ messageForm.addEventListener('submit', e => {
 });
 
 
-function connectionMessage(msg) {
+function connectionMessage(name) {
+    //log in to main chat
     const connectionEL = document.createElement("span");
     connectionEL.className = "conmess";
-    connectionEL.innerHTML = msg;
+    connectionEL.innerHTML = name + " joined";
     const messagediv = document.createElement("div");
     messagediv.className = "message messagecenter";
     messagediv.append(connectionEL);
     messageContainer.append(messagediv);
     innermain.scrollTop = innermain.scrollHeight;
+
+
+    //log in to side bar
+    const newuser = document.createElement("div");
+    newuser.classList = "activeusersname";
+    newuser.setAttribute("data-inital", getinitals(name));
+    newuser.innerHTML = name;
+    useractivelist.append(newuser);
+    console.log(newuser);
 }
 
+function getinitals(name) {
+    var initials = name.match(/\b\w/g) || [];
+    initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
+    return initials;
+}
+/*
+    <div id="useractivelist">
+        <div class="activeusersname" data-inital="JD">JD (you)</div>
+    </div>
+*/
 function appendMessage(data) {
     const messageElement = document.createElement('span');
 
