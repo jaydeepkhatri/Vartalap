@@ -19,12 +19,16 @@
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(0,0,0,0.5);
+    background: var(--conmesscolor) rgba(0,0,0,0.5);
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #eee;
+}
+body * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.5) transparent;
 }
 
 .loginoverlay {
@@ -163,6 +167,11 @@ body {
 .navbar h2 {
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+.navbar span {
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .message-container {
@@ -337,25 +346,35 @@ body {
     overflow-x: hidden;
     transition: 0.35s;
 }
-.sidebaropen {
-    width: 0 !important;
+.sidebar hr {
+    margin: 20px;
+    color: rgba(0,0,0,0.3)
 }
-.activeusers {
+.activeuserscont {
     margin-top: 20px;
 }
-.sidetitle {
-    text-align: center;
-    font-size: 20px;
-}
-.activeusers .useractivelist {
-    margin-top: 20px;
+.activeuserscont .useractivelist {
+    margin-top: 16px;
     max-height: 240px;
     overflow: auto;
-    margin: 10px 0;
     border-radius: 4px;
     background: #fff;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0,0,0,0.5) transparent;
+}
+.activeusertitlecont {
+    /* margin-top: 20px; */
+    width: 90%;
+    margin: 16px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#activeusertitle {
+    font-size: 20px;
+}
+.sidetitle {
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.15);
 }
 .useractivelist .activeusersname {
     padding: 10px 20px;
@@ -378,31 +397,30 @@ body {
 .useractivelist .activeusersname:hover {
     background: #e2e2e2;
 }
-h2.sidetitle {
-    padding: 10px 0;
-}
 .colorcontainer {
-    margin: 20px;
+    padding: 16px;
     background: #fff;
 }
+.colorcontainer .title {
+    /* padding: 16px 0; */
+    font-size: 20px;
+    width: 90%;
+}
 .colors {
-    padding: 20px;
+    /* padding: 0 20px; */
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     place-items: center;
 }
 .color {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: red;
     box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
 }
-/* .coloractive {
-    border: 5px solid var(--conmesscolor)
-} */
-
 .blue {
     background: rgb(31, 128, 255);
 }
