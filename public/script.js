@@ -1,5 +1,5 @@
-const socket = io();
-// const socket = io(`http://localhost:3000`);
+// const socket = io();
+const socket = io(`http://localhost:3000`);
 const messageContainer = document.querySelector('#message-container');
 const messageForm = document.querySelector('#send-container');
 const innermain = document.querySelector("#innermain");
@@ -37,7 +37,6 @@ usernameform.addEventListener('submit', (e) => {
     }
     if (name.match(/^[a-zA-Z0-9_ ]+$/)) {
         socket.emit('new-user', name);
-        // currentusername.innerHTML = name;
         loginoverlay.style.display = "none";
         messageInput.focus();
 
@@ -45,26 +44,29 @@ usernameform.addEventListener('submit', (e) => {
             appendMessage(data)
         });
 
+
+        //? Socket connected
         socket.on('user-connected', data => {
-            connectionMessage(`${data.name}`);
-            // if (data.totalusers == '1') {
-            //     currentusername.innerHTML = data.totalusers + " User";
-            // } else {
-            //     currentusername.innerHTML = data.totalusers + " Users";
-            // }
-            currentusername.innerHTML = data.totalusers + " active";
+            connectionMessage(`${data.name} joined`);
+            sidebarusers(data.users);
+            currentusername.innerHTML = Object.keys(data.users).length + " active";
+            changetheme(data.theme);
         });
 
+
+        //? Socket disconnected
         socket.on('user-disconnected', data => {
+            //passing with full data because it need name of the user who left
             connectionMessage(`${data.name} left`);
-            if (data.totalusers === '1') {
-                currentusername.innerHTML = data.totalusers + " user";
-            } else {
-                currentusername.innerHTML = data.totalusers + " users";
-            }
+            //removing the current user
+            delete data.users[data.id];
+            currentusername.innerHTML = Object.keys(data.users).length + " active";
 
+            //updating it
+            sidebarusers(data.users);
         });
 
+        //? Update theme
         socket.on('themecolor', color => {
             changetheme(color);
         });
@@ -102,7 +104,7 @@ likebtn.addEventListener("click", (e) => {
 
 
 
-
+//? User writing message
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const message = messageInput.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -133,25 +135,30 @@ messageForm.addEventListener('submit', e => {
 });
 
 
-function connectionMessage(name) {
+function connectionMessage(msg) {
     //log in to main chat
     const connectionEL = document.createElement("span");
     connectionEL.className = "conmess";
-    connectionEL.innerHTML = name + " joined";
+    connectionEL.innerHTML = msg;
     const messagediv = document.createElement("div");
     messagediv.className = "message messagecenter";
     messagediv.append(connectionEL);
     messageContainer.append(messagediv);
     innermain.scrollTop = innermain.scrollHeight;
+}
 
-
+function sidebarusers(users) {
     //log in to side bar
-    const newuser = document.createElement("div");
-    newuser.classList = "activeusersname";
-    newuser.setAttribute("data-inital", getinitals(name));
-    newuser.innerHTML = name;
-    useractivelist.append(newuser);
-    console.log(newuser);
+    useractivelist.innerHTML = "";
+
+    Object.keys(users).forEach(key => {
+        // console.log(users[key])
+        const newuser = document.createElement("div");
+        newuser.classList = "activeusersname";
+        newuser.setAttribute("data-inital", getinitals(users[key]));
+        newuser.innerHTML = users[key];
+        useractivelist.append(newuser);
+    });
 }
 
 function getinitals(name) {
@@ -159,11 +166,6 @@ function getinitals(name) {
     initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
     return initials;
 }
-/*
-    <div id="useractivelist">
-        <div class="activeusersname" data-inital="JD">JD (you)</div>
-    </div>
-*/
 function appendMessage(data) {
     const messageElement = document.createElement('span');
 
@@ -176,7 +178,6 @@ function appendMessage(data) {
         } else {
             messageElement.className = "messageright";
         }
-
     } else {
         messagediv.className = "message messageleftcont";
         if (data.message === "👍") {
