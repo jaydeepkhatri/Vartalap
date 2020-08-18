@@ -12,22 +12,32 @@ http.listen(port, function () {
     console.log('listening on *:' + port);
 });
 
-let users = {}
+let users = {};
+
+//default theme
+let theme = "--themecolor: rgb(31, 128, 255);	--conmesscolor: rgb(170, 184, 204);	--messageinputcolor: rgb(241, 247, 255);";
 
 io.sockets.on('connection', socket => {
     socket.on('new-user', name => {
         users[socket.id] = name;
-        io.emit('user-connected', { name: users[socket.id], totalusers: Object.keys(users).length });
+        io.emit('user-connected', { name: users[socket.id], users: users, theme: theme });
+
     });
     socket.on('send-chat-message', message => {
         socket.broadcast.emit('chat-message', { message: message, name: users[socket.id] });
     });
     socket.on('disconnect', () => {
-        socket.broadcast.emit('user-disconnected', { name: users[socket.id], totalusers: Object.keys(users).length - 1 });
-        delete users[socket.id];
+        if (users[socket.id]) {
+            socket.broadcast.emit('user-disconnected', { name: users[socket.id], users: users, id: socket.id });
+
+            //deleteing the record from server
+            delete users[socket.id];
+        }
+
     });
 
     socket.on('changetheme', (color) => {
+        theme = color;
         socket.broadcast.emit('themecolor', color);
     });
 })
