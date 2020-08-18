@@ -351,19 +351,12 @@ body * {
     color: rgba(0,0,0,0.3)
 }
 .activeuserscont {
-    margin-top: 20px;
-}
-.activeuserscont .useractivelist {
-    margin-top: 16px;
-    max-height: 240px;
-    overflow: auto;
-    border-radius: 4px;
-    background: #fff;
+    padding-top: 16px;
 }
 .activeusertitlecont {
     /* margin-top: 20px; */
     width: 90%;
-    margin: 16px auto;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -376,12 +369,20 @@ body * {
     padding: 8px;
     box-shadow: 4px 4px 4px rgba(0,0,0,0.15);
 }
-.useractivelist .activeusersname {
+.useractivelist {
+    margin-top: 16px;
+    max-height: 240px;
+    overflow: auto;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.activeusersname {
     padding: 10px 20px;
     line-height: 40px;
     transition: 0.1s;
 }
-.useractivelist .activeusersname::before{
+.activeusersname::before{
     content:attr(data-inital);
     display: inline-block;
     text-align: center;
@@ -394,7 +395,7 @@ body * {
     margin-right: 8px;
     transition: 0.15s;
 }
-.useractivelist .activeusersname:hover {
+.activeusersname:hover {
     background: #e2e2e2;
 }
 .colorcontainer {
