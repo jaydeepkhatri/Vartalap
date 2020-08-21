@@ -19,9 +19,6 @@ sendbutton.style.display = "none";
 let emoji = "👍"
 let name;
 
-
-
-
 const colorstheme = {
     pink: "--themecolor: rgb(255, 0, 106); --conmesscolor: rgb(255, 154, 196); --messageinputcolor: rgb(255, 240, 246);",
     blue: "--themecolor: rgb(31, 128, 255);	--conmesscolor: rgb(170, 184, 204);	--messageinputcolor: rgb(241, 247, 255); ",
@@ -32,7 +29,6 @@ const colorstheme = {
 usernameform.addEventListener('submit', (e) => {
     e.preventDefault();
     name = document.querySelector('#username').value;
-    messageInput.value = "";
     if (name === "" || name === null) {
         alert("Wrtie a name");
     }
@@ -40,11 +36,11 @@ usernameform.addEventListener('submit', (e) => {
         socket.emit('new-user', name);
         loginoverlay.style.display = "none";
         messageInput.focus();
+        console.log("username form");
 
         socket.on('chat-message', data => {
             appendMessage(data);
         });
-
 
         //? Socket connected
         socket.on('user-connected', data => {
@@ -53,7 +49,6 @@ usernameform.addEventListener('submit', (e) => {
             currentusername.innerHTML = Object.keys(data.users).length + " active";
             changetheme(data.theme);
         });
-
 
         //? Socket disconnected
         socket.on('user-disconnected', data => {
@@ -93,17 +88,10 @@ messageInput.addEventListener("input", (e) => {
 });
 
 
-
-
 likebtn.addEventListener("click", (e) => {
     appendMessage({ username: name, message: emoji });
     socket.emit('send-chat-message', emoji);
 });
-
-
-
-
-
 
 //? User writing message
 messageForm.addEventListener('submit', e => {
@@ -111,6 +99,7 @@ messageForm.addEventListener('submit', e => {
     const message = messageInput.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     if (name == undefined || name == "" || name == null) {
         loginoverlay.style.display = "block";
+        messageInput.value = "";
     }
     if (message == "" || message == null || name == "" || name == null) {
         return null;
@@ -140,7 +129,6 @@ messageForm.addEventListener('submit', e => {
     }
 });
 
-
 function connectionMessage(msg) {
     //log in to main chat
     const connectionEL = document.createElement("span");
@@ -156,7 +144,6 @@ function connectionMessage(msg) {
 function sidebarusers(users) {
     //log in to side bar
     useractivelist.innerHTML = "";
-
     Object.keys(users).forEach(key => {
         // console.log(users[key])
         const newuser = document.createElement("div");
@@ -215,7 +202,6 @@ function currentTime() {
     }
     return `${hours} : ${minutes}`;
 }
-
 
 
 function openSidebar() {
