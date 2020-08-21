@@ -1,5 +1,5 @@
-const socket = io();
-// const socket = io(`http://localhost:3000`);
+// const socket = io();
+const socket = io(`http://localhost:3000`);
 const messageContainer = document.querySelector('#message-container');
 const messageForm = document.querySelector('#send-container');
 const innermain = document.querySelector("#innermain");
@@ -133,6 +133,8 @@ messageForm.addEventListener('submit', e => {
             changetheme(colorstheme.purple);
         }
         messageInput.value = '';
+        sendbutton.style.display = "none";
+        likebtn.style.display = "block";
         innermain.scrollTop = innermain.scrollHeight;
     }
 });
