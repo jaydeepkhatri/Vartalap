@@ -17,7 +17,7 @@ const screencover = document.querySelector("#screencover");
 let currenttheme = "blue";
 sendbutton.style.display = "none";
 let emoji = "👍"
-name = null;
+let name;
 
 
 
@@ -41,7 +41,7 @@ usernameform.addEventListener('submit', (e) => {
         messageInput.focus();
 
         socket.on('chat-message', data => {
-            appendMessage(data)
+            appendMessage(data);
         });
 
 
@@ -108,6 +108,9 @@ likebtn.addEventListener("click", (e) => {
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const message = messageInput.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    if (name == undefined || name == "" || name == null) {
+        loginoverlay.style.display = "block";
+    }
     if (message == "" || message == null || name == "" || name == null) {
         return null;
     } else {
