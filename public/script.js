@@ -32,6 +32,7 @@ const colorstheme = {
 usernameform.addEventListener('submit', (e) => {
     e.preventDefault();
     name = document.querySelector('#username').value;
+    messageInput.value = "";
     if (name === "" || name === null) {
         alert("Wrtie a name");
     }
