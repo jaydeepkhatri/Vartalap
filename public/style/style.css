@@ -95,6 +95,7 @@ body * {
 
 .loginoverlay .formcontainer form .userforminput {
   margin-bottom: 20px;
+  outline: 0;
 }
 
 .loginoverlay .formcontainer form .userformsubmit {
