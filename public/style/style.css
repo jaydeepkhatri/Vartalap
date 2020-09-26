@@ -1,0 +1,466 @@
+:root {
+  --themecolor: rgb(31, 128, 255);
+  --conmesscolor: rgb(170, 184, 204);
+  --messageinputcolor: rgb(241, 247, 255);
+  --maincontainerbg: rgb(248, 248, 248);
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--conmesscolor) rgba(0, 0, 0, 0.5);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eee;
+}
+
+body * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
+
+/* Name Overlay Container */
+.loginoverlay {
+  height: 100vh;
+  width: 100%;
+  background: #ebebeb;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.loginoverlay .formcontainer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  place-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.loginoverlay .formcontainer .imgcontainer {
+  width: 300px;
+}
+
+.loginoverlay .formcontainer .imgcontainer img {
+  width: 100%;
+}
+
+.loginoverlay .formcontainer form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  width: 300px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 20px;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.loginoverlay .formcontainer form h2 {
+  margin-bottom: 20px;
+}
+
+.loginoverlay .formcontainer form .userforminput, .loginoverlay .formcontainer form .userformsubmit {
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.loginoverlay .formcontainer form .userforminput {
+  margin-bottom: 20px;
+}
+
+.loginoverlay .formcontainer form .userformsubmit {
+  background: var(--themecolor);
+  color: var(--white);
+}
+
+.loginoverlay .formcontainer .cornerimg {
+  position: absolute;
+  z-index: -1;
+}
+
+.loginoverlay .formcontainer .bl {
+  bottom: 0;
+  left: 0;
+}
+
+.loginoverlay .formcontainer .br {
+  bottom: 0;
+  right: 0;
+}
+
+/* Main Content */
+.maincontainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 100px auto;
+  height: 600px;
+  background: var(--maincontainerbg);
+  -webkit-box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
+          box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.maincontainer .innermain {
+  overflow: auto;
+  height: 100%;
+}
+
+.maincontainer .innermain .navcontainer {
+  background: var(--themecolor);
+  color: white;
+  height: 80px;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .innermain .navcontainer .navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
+.maincontainer .innermain .navcontainer .navbar h2 {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.maincontainer .innermain .navcontainer .navbar span {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.maincontainer .innermain .message-container {
+  padding: 16px;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 20px;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  margin-bottom: 60px;
+}
+
+.maincontainer .innermain .message-container .message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-animation: ease-in 0.05s fadetop;
+          animation: ease-in 0.05s fadetop;
+}
+
+.maincontainer .innermain .message-container .message .conmess {
+  text-align: center;
+  background: var(--conmesscolor);
+  font-size: 14px;
+  border-radius: 3px;
+  width: 150px;
+  padding: 12px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19);
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .innermain .message-container .messagecenter {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.maincontainer .innermain .message-container .messageleftcont {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.maincontainer .innermain .message-container .messagerightcont {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.maincontainer .innermain .message-container .messageleft {
+  color: #000;
+  background: var(--white);
+}
+
+.maincontainer .innermain .message-container .messageleft,
+.maincontainer .innermain .message-container .messageright {
+  padding: 12px 16px;
+  border-radius: 50px;
+  background: var(--themecolor);
+  color: var(--white);
+  -webkit-box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .innermain .message-container .messageright {
+  position: relative;
+}
+
+.maincontainer .innermain .message-container .messageright::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 18px;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--themecolor);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.maincontainer .innermain .message-container .messageright:hover::after {
+  right: -2px;
+}
+
+.maincontainer .innermain .message-container .messageleft {
+  color: #000;
+  background: var(--white);
+}
+
+.maincontainer .innermain .message-container .messageleft .username {
+  color: var(--themecolor);
+  font-size: 12px;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .innermain .message-container .emoji {
+  font-size: 32px;
+}
+
+.maincontainer .sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 7;
+  height: 100%;
+  width: 0;
+  background: var(--messageinputcolor);
+  overflow-x: hidden;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+.maincontainer .sidebar hr {
+  margin: 20px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.maincontainer .sidebar .activeuserscont {
+  padding-top: 16px;
+  width: 300px;
+}
+
+.maincontainer .sidebar .activeuserscont .activeusertitlecont {
+  width: 90%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.maincontainer .sidebar .activeuserscont .activeusertitlecont #activeusertitle {
+  font-size: 20px;
+}
+
+.maincontainer .sidebar .activeuserscont .activeusertitlecont .sidetitle {
+  border-radius: 8px;
+  padding: 8px;
+  -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+.maincontainer .sidebar .activeuserscont .useractivelist {
+  margin-top: 16px;
+  max-height: 240px;
+  overflow: auto;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.maincontainer .sidebar .activeuserscont .useractivelist .activeusersname {
+  padding: 10px 20px;
+  line-height: 40px;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.maincontainer .sidebar .activeuserscont .useractivelist .activeusersname::before {
+  content: attr(data-inital);
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background: var(--themecolor);
+  margin-right: 8px;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .sidebar .activeuserscont .useractivelist .activeusersname:hover {
+  background: #e2e2e2;
+}
+
+.maincontainer .footer {
+  position: absolute;
+  bottom: 0;
+  background-color: var(--maincontainerbg);
+  width: 100%;
+  padding: 12px;
+  height: auto;
+}
+
+.maincontainer .footer .send-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.maincontainer .footer .send-container .message-input {
+  padding: 12px;
+  border: 0;
+  border-bottom: 2px solid var(--themecolor);
+  border-radius: 4px;
+  outline: 0;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .footer .send-container .message-input:focus {
+  background: var(--messageinputcolor);
+  border-color: var(--themecolor);
+}
+
+.maincontainer .footer .send-container .message-input:active {
+  outline: 0;
+}
+
+.maincontainer .footer .send-container .send-button {
+  margin-left: 4px;
+  border: 2px solid var(--themecolor);
+  background: var(--white);
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 0 20px;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.maincontainer .footer .send-container .send-button:hover {
+  color: var(--white);
+  background: var(--themecolor);
+}
+
+.maincontainer .footer .send-container .send-button:active {
+  color: var(--white);
+  -webkit-box-shadow: 0 0 50px 50px var(--themecolor) inset, 0 0 10px var(--themecolor);
+          box-shadow: 0 0 50px 50px var(--themecolor) inset, 0 0 10px var(--themecolor);
+}
+
+.maincontainer .screencover {
+  position: absolute;
+  z-index: 6;
+  display: none;
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  width: 100%;
+}
+
+@-webkit-keyframes fadetop {
+  from {
+    -webkit-transform: translateY(8px);
+            transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadetop {
+  from {
+    -webkit-transform: translateY(8px);
+            transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .formcontainer {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .formcontainer .imgcontainer {
+    display: none;
+  }
+}
+/*# sourceMappingURL=style.css.map */
